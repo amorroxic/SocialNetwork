@@ -12,7 +12,6 @@ class ImportController extends Zend_Controller_Action
         $this->view->addHelperPath(ROOTDIR.'/application/library/Helpers/','Zend_View_Helper');
 
         try {
-
             $importManager = new Import_Manager($this->view);
             $importManager->sanitizeInputData();
             $importManager->insertDataIntoDatabase();

@@ -5,6 +5,7 @@ class Import_Manager
 
 	private $rawData;
 	public $people;
+	public $cities;
 	private $view;
 
 	// loads the contents of the file
@@ -25,6 +26,9 @@ class Import_Manager
 
 		// array of slugs, used to prevent different people getting the same slug
 		$slugs = array();
+
+		// array grouping cities by name
+		$this->cities = array();
 
 		if (!is_array($this->rawData)) {
 			throw new SocialException(SocialException::IMPORTER_CHECK_ERROR);
@@ -61,7 +65,8 @@ class Import_Manager
 				'slug'			=> $uniqueSlug,
 				'age'			=> $age,
 				'gender'		=> $gender,
-				'connections'	=> $person['connections']
+				'connections'	=> $person['connections'],
+				'cities'		=> $person['cities']
 			);
 
 			$output[] = $sanitizedPerson;
@@ -107,6 +112,7 @@ class Import_Manager
 			$dbID = $accountsTable->insert($statement);
 			$importedID = $person['id'];
 
+			// basically not trusting the ID from the data source file. Regenerating it.
 			if (is_numeric($importedID) && !array_key_exists($importedID, $idToDBIdRelation)) {
 				$idToDBIdRelation[$importedID] = $dbID;
 			}
@@ -119,12 +125,24 @@ class Import_Manager
 				$connections[] = $connection;
 			}
 
+			foreach ($person['cities'] as $city => $rating) {
+				if (!array_key_exists($city, $this->cities)) {
+					$this->cities[$city] = array();
+					$this->cities[$city]['sum_all_ratings'] = 0;
+					$this->cities[$city]['ratings'] = array();
+				}
+				$newRating = array();
+				$newRating['account_id'] = $dbID;
+				$newRating['rating'] = $rating;
+				$this->cities[$city]['ratings'][] = $newRating;
+				$this->cities[$city]['sum_all_ratings'] += $rating;
+			}
+
 		}
 
 		$connectionsTable = new Accounts_Connections_Table();
 		// empty the table
 		$connectionsTable->delete('1');
-
 
 		foreach ($connections as $connection) {
 			$friendID = $connection['friend'];
@@ -136,8 +154,44 @@ class Import_Manager
 			}
 		}
 
+		$this->insertCityRatings();
+
 		return true;
 
 	}
+
+	public function insertCityRatings() {
+
+		$citiesTable = new Cities_Table();
+		$citiesTable->delete('1');
+		$citiesRatingsTable = new Cities_Ratings_Table();
+		$citiesRatingsTable->delete('1');
+
+		foreach ($this->cities as $cityName=>$cityData) {
+
+				if (count($cityData['ratings']) == 0) {
+					$cityRank = 0;
+				} else {
+					$cityRank = $cityData['sum_all_ratings'] / count($cityData['ratings']);
+				}
+
+				$statement = array(
+				   'city_name'	=>	$cityName,
+				   'rating'		=>	$cityRank
+				);
+				$cityDbID = $citiesTable->insert($statement);
+
+				foreach ($cityData['ratings'] as $rating) {
+					$statement = array(
+					   'account_id'		=>$rating['account_id'],
+					   'city_id'		=>$cityDbID,
+					   'rating'			=>$rating['rating']
+					);
+					$citiesRatingsTable->insert($statement);
+				}
+
+		}
+	}
+
 
 }

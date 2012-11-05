@@ -19,6 +19,7 @@ class Api_V1Controller extends Site_Api_Controller
                         ->addActionContext('friends', array('xml', 'json'))
                         ->addActionContext('friends-of-friends', array('xml', 'json'))
                         ->addActionContext('suggested-friends', array('xml', 'json'))
+                        ->addActionContext('recommended-cities', array('xml', 'json'))
                         ->setAutoJsonSerialization(true)
                         ->initContext($format);
         } catch (Exception $e) {
@@ -54,6 +55,17 @@ class Api_V1Controller extends Site_Api_Controller
       try{
         $userID = $this->processInput('for');
         $this->view->suggested_friends = $this->accountsManager->getSuggestedFriendsFor($userID);
+      } catch (SocialException $e) {
+        $this->view->error_code = $e->getCode();
+        $this->view->error_message = $e->getMessage();
+      }
+    }
+
+    public function recommendedCitiesAction() {
+      // never trust input. trust Mogwai instead.
+      try{
+        $userID = $this->processInput('for');
+        $this->view->cities = $this->citiesManager->getRecommendedCitiesFor($userID);
       } catch (SocialException $e) {
         $this->view->error_code = $e->getCode();
         $this->view->error_message = $e->getMessage();

@@ -1,0 +1,14 @@
+<h2><?=$this->title;?>
+	(
+		<a target="_blank" href="<?=$this->apiLink.'/'.$person['slug'];?>">XML</a>
+		/
+		<a target="_blank" href="<?=$this->apiLink.'/'.$person['slug'];?>?format=json">JSON</a>
+	)
+</h2>
+<ul>
+<?php foreach ($this->cities as $city): ?>
+<li>
+	<?=$city['city_name'];?>
+</li>
+<?php endforeach;?>
+</ul>

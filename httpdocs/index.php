@@ -11,10 +11,9 @@ ini_set('memory_limit', -1 );
 
 // Set the root path
 $rootDirectory = dirname(__FILE__);
-$publicDirectory = "public_html";
+$publicDirectory = "httpdocs";
 $rootDirectory = substr($rootDirectory, 0, strlen($rootDirectory) - strlen($publicDirectory) - 1);
 define("ROOTDIR", $rootDirectory);
-
 
 // Include the configuration file
 require(ROOTDIR . '/configuration/configuration.php');

@@ -37,6 +37,7 @@ class UserDataController extends Site_Default_Controller
             $friends = $this->accountsManager->getFriendsOf($userID);
             $friendsOfFriends = $this->accountsManager->getFriendsOfFriendsOf($userID);
             $suggestedFriends = $this->accountsManager->getSuggestedFriendsFor($userID);
+            $recommendedCities = $this->citiesManager->getRecommendedCitiesFor($userID);
 
             $this->view->people = $friends;
             $this->view->title = "Friends";
@@ -52,6 +53,12 @@ class UserDataController extends Site_Default_Controller
             $this->view->title = "Suggested friends";
             $this->view->apiLink = "/api/v1/suggested-friends/for";
             $jsonData['content'] .= $this->view->render('user-data/list.phtml');
+
+            $slug = $this->sanitizeInput('slug');
+            $this->view->cities = $recommendedCities;
+            $this->view->title = "Recommended cities";
+            $this->view->apiLink = "/api/v1/recommended-cities/for/".$slug;
+            $jsonData['content'] .= $this->view->render('user-data/cities.phtml');
 
         } catch (Exception $e) {
             $jsonData['content'] = "<h2>".$e->getMessage()."</h2>";

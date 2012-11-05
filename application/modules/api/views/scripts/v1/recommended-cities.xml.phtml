@@ -1,0 +1,13 @@
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>';?>
+<?php if(isset($this->error_code)):?>
+	<error><code><?=$this->error_code;?></code><message><?=htmlentities($this->error_message);?></message></error>
+<?php endif;?>
+<?php if(isset($this->cities)):?>
+	<cities><?php foreach($this->cities as $city):?>
+		<city>
+			<name><?php echo htmlentities($city["city_name"]); ?></name>
+			<rating><?php echo htmlspecialchars($city["rating"]); ?></rating>
+		</city>
+			<?php endforeach; ?>
+	</cities>
+<?php endif;?>

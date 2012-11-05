@@ -4,10 +4,12 @@ class Site_Controller extends Zend_Controller_Action
 {
 
 	protected $accountsManager;
+	protected $citiesManager;
 
 	public function init()
 	{
 		$this->accountsManager = new Accounts_Manager();
+		$this->citiesManager = new Cities_Manager();
 		$this->view->addHelperPath(ROOTDIR.'/application/library/Helpers/','Zend_View_Helper');
 	}
 

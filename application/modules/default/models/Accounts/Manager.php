@@ -23,11 +23,11 @@ class Accounts_Manager
 			return false;
 		}
 
-		if (get_magic_quotes_gpc()) {
-			$slug = mysql_real_escape_string(stripslashes($slug));
-		} else {
-			$slug = mysql_real_escape_string($slug);
-		}
+		// if (get_magic_quotes_gpc()) {
+		// 	$slug = mysqli_real_escape_string(stripslashes($slug));
+		// } else {
+		// 	$slug = mysqli_real_escape_string($slug);
+		// }
 
 		$select = $this->table->select();
 		$select->where('slug = ?',$slug);

@@ -15,10 +15,4 @@ class IndexController extends Site_Default_Controller
 
     }
 
-    public function importDataSourceAction() {
-    	$people = $this->getSanitizedDataSource();
-    	$this->accountsManager->insertData($people);
-    	die("import successful.");
-    }
-
 }
