@@ -180,24 +180,6 @@ $socialData = array(
 		'gender' => 'female',
 		'connections' => array(7, 11, 12, 13, 16, 17, 19),
 		'cities' => array('Dublin' => 90, 'London' => 90)
-	),
-	 array(
-		'id' => 21,
-		'firstName' => 'Marie',
-		'surname' => 'Curie',
-		'age' => 28,
-		'gender' => 'female',
-		'connections' => array(7, 11, 12, 13, 16, 17, 19),
-		'cities' => array('Dublin' => 90, 'London' => 90)
-	),
-	array(
-		'id' => 22,
-		'firstName' => 'Marie',
-		'surname' => 'Curie',
-		'age' => 28,
-		'gender' => 'female',
-		'connections' => array(7, 11, 12),
-		'cities' => array('Dublin' => 90, 'London' => 90)
 	)
 );
 

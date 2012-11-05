@@ -61,9 +61,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $controller = $this->getResource('FrontController');
 
 		// Register the profiler plugin
-		if (APPLICATION_ENV != 'production') {
+		//if (APPLICATION_ENV != 'production') {
 			$controller->registerPlugin(new Plugins_Profiler());
-		}
+		//}
 
 		// Register the GZip plugin
 		$controller->registerPlugin(new Plugins_GZip());

@@ -5,5 +5,5 @@ return array(
 	'username' => 'root',
 	'password' => 'root',
 	'dbname'   => 'webres',
-	'profiler' => APPLICATION_DEBUG
+	'profiler' => 1
 );

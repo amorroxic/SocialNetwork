@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	
+
 	'file' => array(
                    'enabled'       => true,
                    'logLevel'      => Zend_Log::INFO
@@ -17,7 +17,7 @@ return array(
                    'subjectPrefix' => 'ERRORS',
                    'logLevel'      => Zend_Log::ERR
                ),
-	
+
 	'firebug' => array(
                    'enabled'       => false,
                    'logLevel'      => Zend_Log::DEBUG
