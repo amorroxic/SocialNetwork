@@ -1,7 +1,7 @@
 <?php
 /**
  * Caching plugin
- * 
+ *
  * @uses Zend_Controller_Plugin_Abstract
  */
 class Plugins_Cache extends Zend_Controller_Plugin_Abstract
@@ -24,8 +24,8 @@ class Plugins_Cache extends Zend_Controller_Plugin_Abstract
 
     /**
      * Constructor: initialize cache
-     * 
-     * @param  array|Zend_Config $options 
+     *
+     * @param  array|Zend_Config $options
      * @return void
      * @throws Exception
      */
@@ -58,24 +58,17 @@ class Plugins_Cache extends Zend_Controller_Plugin_Abstract
      *
      * Determine if we have a cache hit. If so, return the response; else,
      * start caching.
-     * 
-     * @param  Zend_Controller_Request_Abstract $request 
+     *
+     * @param  Zend_Controller_Request_Abstract $request
      * @return void
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-        if (!$request->isGet()) {
+        if (/*!$request->isGet()*/true) {
             self::$doNotCache = true;
             return;
         }
-		$module = strtolower($request->getModuleName());
-		$controller = strtolower($request->getControllerName());
-		$action = strtolower($request->getActionName());
-        if ($module == "admin") {
-            self::$doNotCache = true;
-            return;
-        }
-		
+
         $path = $request->getPathInfo();
 
         $this->key = md5($path);
@@ -87,7 +80,7 @@ class Plugins_Cache extends Zend_Controller_Plugin_Abstract
 
     /**
      * Store cache
-     * 
+     *
      * @return void
      */
     public function dispatchLoopShutdown()
