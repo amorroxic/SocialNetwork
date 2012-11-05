@@ -1,0 +1,33 @@
+<?=$this->doctype('XHTML1_TRANSITIONAL') ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<?php
+
+$this->headLink()->appendStylesheet($this->baseURL() . '/styles/reset.css', 'screen,projection');
+$this->headLink()->appendStylesheet($this->baseURL() . '/styles/style.css', 'screen,projection');
+$this->headLink()->appendStylesheet($this->baseURL() . '/styles/chosen/chosen.css', 'screen,projection');
+
+$this->headScript()->prependFile('/javascript/logic.js');
+$this->headScript()->prependFile('/javascript/jquery/chosen.jquery.min.js');
+$this->headScript()->prependFile('/javascript/jquery/jquery-1.8.2.min.js');
+
+$this->headTitle()->append('Web Reservations Demo');
+$this->headTitle()->setSeparator(' > ');
+
+?>
+<head>
+<?= $this->headTitle()."\n"; ?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?= $this->headMeta()."\n";?>
+<?= $this->headLink()."\n"; ?>
+</head>
+
+<body>
+
+<div class="container">
+<?= $this->layout()->content."\n"; ?>
+</div>
+
+<?= $this->headScript()."\n"; ?>
+
+</body>
+</html>

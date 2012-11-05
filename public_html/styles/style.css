@@ -1,0 +1,111 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+
+body {
+  color: #666;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+  min-width: 980px;
+}
+
+/* Container & positionings
+----------------------------------------------------------------------------------------------------*/
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 980px;
+}
+
+.highlight {
+  margin: 40px 0;
+}
+
+.selector, .result {
+  margin: 10px 0;
+}
+
+
+/* Text & DOM Elements
+----------------------------------------------------------------------------------------------------*/
+h1, h2 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin: 20px 0;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #00afce;
+}
+
+
+textarea, input, select {
+  float: left;
+  width: 350px;
+  appearanceheight: 20px;
+  background-color: white;
+  color: #777777;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  padding: 5px;
+}
+
+a {
+  color: #00afce;
+}
+a:hover {
+  color: #125786;
+}
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before,
+.clearfix:after,
+.container_12:before,
+.container_12:after,
+.container_16:before,
+.container_16:after {
+  content: '.';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after,
+.container_12:after,
+.container_16:after {
+  clear: both;
+}
+
+/*
+  The following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix,
+.container_12,
+.container_16 {
+  zoom: 1;
+}
+

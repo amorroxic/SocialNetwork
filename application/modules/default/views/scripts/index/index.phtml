@@ -1,0 +1,15 @@
+	<!-- I am index. I am your father. -->
+	<div class="highlight">
+		<h1>This is a pseudo social network attempt.</h1>
+		<div class="selector clearfix">
+			<select id='people-selector' class="chosen">
+				<option value=''>Select a user</option>
+				<?php foreach ($this->accounts as $person): ?>
+				<option value='<?=$person['slug'];?>'><?=$person['first_name'].' '.$person['last_name'];?></option>
+				<?php endforeach;?>
+			</select>
+		</div>
+		<div class="clear"></div>
+		<div id="result" class="clearfix">
+		</div>
+	</div>

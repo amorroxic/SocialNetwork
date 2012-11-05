@@ -1,0 +1,13 @@
+<h2><?=$this->title;?></h2>
+<ul>
+<?php foreach ($this->people as $person): ?>
+<li>
+	<?=$person['first_name'].' '.$person['last_name'];?>
+	(
+		<a target="_blank" href="<?=$this->apiLink.'/'.$person['slug'];?>">XML</a>
+		/
+		<a target="_blank" href="<?=$this->apiLink.'/'.$person['slug'];?>?format=json">JSON</a>
+	)
+</li>
+<?php endforeach;?>
+</ul>
